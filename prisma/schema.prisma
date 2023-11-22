@@ -67,12 +67,14 @@ model Option {
 }
 
 model Participation {
-  id      String       @id @default(cuid())
-  user    User         @relation(fields: [user_id], references: [id])
-  user_id String
-  poll    Poll         @relation(fields: [poll_id], references: [id])
-  poll_id String
-  choices UserChoice[] // Define the one-to-many relationship with UserChoice
+  id        String       @id @default(cuid())
+  user      User?        @relation(fields: [user_id], references: [id])
+  user_id   String?
+  userName  String?
+  userEmail String?
+  poll      Poll         @relation(fields: [poll_id], references: [id])
+  poll_id   String
+  choices   UserChoice[] // Define the one-to-many relationship with UserChoice
 }
 
 model UserChoice {

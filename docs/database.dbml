@@ -38,8 +38,10 @@ Table Option {
 
 Table Participation {
   id serial [pk]
-  user_id serial [ref: > User.id ]
-  poll_id serial [ref: > Poll.id ]
+  user_id serial [ref: > User.id, null]
+  username text [null] 
+  user_email text [null]
+  poll_id serial [ref: > Poll.id]
 }
 
 Table UserChoice {
