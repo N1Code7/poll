@@ -1,0 +1,49 @@
+Table User {
+  id serial [pk]
+  last_name varchar(100)
+  first_name varchar(100)
+  email varchar(255) [unique]
+  created_at datetime
+  updated_at datetime [null]
+}
+
+Table Role {
+  id serial [pk]
+  title varchar(100)
+}
+
+Table User_Role {
+  id serial [pk]
+  user_id serial [ref: > User.id]
+  role_id serial [ref: > Role.id]
+}
+
+Table Poll {
+  id serial [pk]
+  user_id serial [ref: < User.id] // poll's owner
+  question text
+  description text [null]
+  isMultipleChoices bool
+  hasOtherChoice bool
+  created_at datetime
+  updated_at datetime [null]
+}
+
+Table Option {
+  id serial [pk]
+  title text
+  user_id serial [ref: < User.id] // user's choice
+  poll_id serial [ref: < Poll.id]
+}
+
+Table Participation {
+  id serial [pk]
+  user_id serial [ref: > User.id ]
+  poll_id serial [ref: > Poll.id ]
+}
+
+Table UserChoice {
+  id serial [pk]
+  participation_id serial [ref: > Participation.id]
+  option_id serial [ref: > Option.id]
+}

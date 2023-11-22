@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(cuid())
+  lastName       String
+  firstName      String
+  email          String          @unique
+  createdAt      DateTime        @default(now()) @map(name: "created_at")
+  updatedAt      DateTime?       @updatedAt @map(name: "updated_at")
+  roles          Role[] // Define the many-to-many relationship with Role
+  polls          Poll[] // Define the one-to-many relationship with Poll
+  options        Option[] // Define the one-to-many relationship with Option
+  participations Participation[] // Define the one-to-many relationship with Participation
+  choices        UserChoice[]
+  UserRole       UserRole[]
+
+  @@map(name: "users")
+}
+
+model Role {
+  id       String     @id @default(cuid())
+  title    String
+  users    User[]
+  UserRole UserRole[]
+}
+
+model UserRole {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id])
+}
+
+model Poll {
+  id                String          @id @default(cuid())
+  ownerId           String
+  owner             User            @relation(fields: [ownerId], references: [id])
+  question          String
+  description       String?
+  isMultipleChoices Boolean         @default(false)
+  hasOtherChoice    Boolean         @default(false)
+  createdAt         DateTime        @default(now()) @map(name: "created_at")
+  updatedAt         DateTime        @default(now()) @map(name: "updated_at")
+  options           Option[] // Define the one-to-many relationship with Option
+  participations    Participation[] // Define the one-to-many relationship with Participation
+}
+
+model Option {
+  id      String       @id @default(cuid())
+  title   String
+  user    User         @relation(fields: [user_id], references: [id])
+  user_id String
+  poll    Poll         @relation(fields: [poll_id], references: [id])
+  poll_id String
+  choices UserChoice[] // Define the one-to-many relationship with UserChoice
+}
+
+model Participation {
+  id      String       @id @default(cuid())
+  user    User         @relation(fields: [user_id], references: [id])
+  user_id String
+  poll    Poll         @relation(fields: [poll_id], references: [id])
+  poll_id String
+  choices UserChoice[] // Define the one-to-many relationship with UserChoice
+}
+
+model UserChoice {
+  id               String        @id @default(cuid())
+  participation    Participation @relation(fields: [participation_id], references: [id])
+  participation_id String
+  option           Option        @relation(fields: [option_id], references: [id])
+  option_id        String
+  User             User?         @relation(fields: [userId], references: [id])
+  userId           String?
+}
