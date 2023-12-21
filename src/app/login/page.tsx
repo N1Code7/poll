@@ -1,11 +1,15 @@
 import Header from "@/layouts/Header";
-import LoginMainContent from "./main";
+import LoginForm from "./loginForm";
 
 const Login = () => {
   return (
     <>
       <Header />
-      <LoginMainContent />
+
+      <main className="login">
+        <h1>Se connecter</h1>
+        <LoginForm />
+      </main>
     </>
   );
 };

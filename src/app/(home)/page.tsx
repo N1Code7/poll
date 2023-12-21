@@ -9,7 +9,6 @@ const Home = async () => {
   return (
     <div>
       <Header />
-
       <UnidentifiedPoll />
     </div>
   );

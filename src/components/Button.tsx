@@ -1,19 +1,24 @@
 "use client";
 
 import { Squircle } from "corner-smoothing";
-import { PropsWithChildren } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 type Props = {
-  type?: string;
+  level?: string;
 };
 
-const Button = ({ type = "primary", children }: PropsWithChildren<Props>) => {
+const Button = ({
+  level = "primary",
+  children,
+  ...rest
+}: ComponentPropsWithoutRef<"button"> & Props) => {
   return (
-    <Squircle className={`btn btn-${type}`} cornerRadius={12} as={"button"}>
-      {children}
+    <Squircle className={`btn-wrapper`} cornerRadius={12}>
+      <button className={`btn btn-${level}`} {...rest}>
+        {children}
+      </button>
     </Squircle>
   );
-  //  <button className={`btn btn-${type}`}>{children}</button>;
 };
 
 export default Button;

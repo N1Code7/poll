@@ -1,14 +1,27 @@
+"use client";
+
 import Logo from "@/assets/Logo";
 import Button from "@/components/Button";
-import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { MouseEvent } from "react";
 
 const Header = () => {
+  const path = usePathname();
+  const router = useRouter();
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("login");
+  };
+
   return (
     <header className="header">
-      <Logo />
+      <Link href={"/"}>
+        <Logo />
+      </Link>
       <div className="right">
-        <Button>Je me connecte</Button>
+        {path !== "/login" && <Button onClick={handleClick}>Je me connecte</Button>}
       </div>
     </header>
   );
