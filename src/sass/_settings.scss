@@ -13,6 +13,58 @@
   src: url("../../public/assets/fonts/Kanit-SemiBold.ttf");
 }
 
-$font-med: "Kanit-m";
-$font-light: "Kanit-l";
-$font-bold: "Kanit-sb";
+$fontMed: "Kanit-m";
+$fontLight: "Kanit-l";
+$fontBold: "Kanit-sb";
+
+//-------
+// COLORS
+
+$bg1: hsla(200, 18%, 90%, 1);
+$bg2: hsla(200, 15%, 80%, 1);
+$accent: hsla(201, 73%, 46%, 1);
+$accent2: hsl(202, 76%, 95%);
+$light: hsla(0, 0%, 100%, 1);
+$dark: hsla(192, 7%, 14%, 1);
+$grey: hsla(200, 11%, 50%, 1);
+$success: hsla(130, 84%, 80%, 1);
+$danger: hsl(356, 73%, 46%);
+
+//------
+// MIXINS
+
+@mixin from($size) {
+  @media (min-width: "#{$size}px") {
+    @content;
+  }
+}
+
+@mixin to($size) {
+  @media (max-width: "#{$size}px") {
+    @content;
+  }
+}
+
+@mixin ptt {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin big-screen {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+
+@mixin coarse {
+  @media (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin fine {
+  @media (pointer: fine) {
+    @content;
+  }
+}
