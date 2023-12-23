@@ -1,10 +1,13 @@
 import Header from "@/layouts/Header";
-import prisma from "@/lib/prisma";
+import { useSession } from "next-auth/react";
 import UnidentifiedPoll from "./UnidentifiedPoll";
 
 const Home = async () => {
-  const users = await prisma.user.findMany();
-  console.log(users);
+  // const { data: session, status } = useSession();
+
+  // if (session) {
+  //   return <p>You are connected!</p>;
+  // }
 
   return (
     <div>

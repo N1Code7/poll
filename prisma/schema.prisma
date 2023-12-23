@@ -15,6 +15,7 @@ model User {
   lastName       String
   firstName      String
   email          String          @unique
+  password       String
   createdAt      DateTime        @default(now()) @map(name: "created_at")
   updatedAt      DateTime?       @updatedAt @map(name: "updated_at")
   roles          Role[] // Define the many-to-many relationship with Role
@@ -75,6 +76,8 @@ model Participation {
   poll      Poll         @relation(fields: [poll_id], references: [id])
   poll_id   String
   choices   UserChoice[] // Define the one-to-many relationship with UserChoice
+  createdAt DateTime     @default(now()) @map(name: "created_at")
+  updatedAt DateTime     @default(now()) @map(name: "updated_at")
 }
 
 model UserChoice {

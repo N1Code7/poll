@@ -42,6 +42,8 @@ Table Participation {
   username text [null] 
   user_email text [null]
   poll_id serial [ref: > Poll.id]
+  created_at datetime
+  updated_at datetime [null]
 }
 
 Table UserChoice {
