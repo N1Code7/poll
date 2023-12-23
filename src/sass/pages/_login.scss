@@ -1,5 +1,5 @@
 main.login {
-  width: 66%;
+  width: clamp(18rem, 66%, 54rem);
   margin: 6rem auto 0;
 
   h1 {

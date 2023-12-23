@@ -1,11 +1,11 @@
 "use client";
 
 import { Squircle } from "corner-smoothing";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
-type Props = {
+type Props = PropsWithChildren<{
   level?: string;
-};
+}>;
 
 const Button = ({
   level = "primary",
