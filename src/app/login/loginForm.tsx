@@ -3,7 +3,6 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { Squircle } from "corner-smoothing";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { FormEvent, useRef } from "react";
 
@@ -16,8 +15,6 @@ const LoginForm = () => {
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-
-    signIn("credentials", { email, password });
   };
 
   return (
